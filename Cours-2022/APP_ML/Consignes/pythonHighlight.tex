@@ -1,0 +1,40 @@
+\lstdefinestyle{MyPython}    
+{%configuration de listings %
+ language=Python,                                       %
+ extendedchars=true,                                    %
+ %inputencoding = utf8,                           %
+ backgroundcolor=\color{LBluePy},                    %
+ basicstyle=\color{black}\fontsize{9}{9}\selectfont\ttfamily\bfseries,
+ numberstyle=\color{BluePy}\fontsize{8}{8}\selectfont\ttfamily,   
+ %identifierstyle=\color{Blue}\ttfamily,                 %
+ keywordstyle=\color{Orange}\ttfamily\bfseries,         %
+ stringstyle=\color{DarkGreen}\ttfamily\bfseries,       %
+ commentstyle=\color{red}\ttfamily,                     %
+ emph={print,str,@property},emphstyle=\color{Mauve}\ttfamily\bfseries,
+ %procnamekeys={def,class},procnamestyle=\color{blue}\ttfamily\bfseries,
+ tabsize=2,                                             %
+ frame=none,                                          %
+% frameround=ffff,                                      %
+ extendedchars=true,                                    %
+ literate={à}{{\`a}}1 {ç}{{\c{c}}}1 {Ç}{{\c{C}}}1 {ê}{{\^e}}1 {é}{{\'e}}1 {è}{{\`e}}1,
+ language=Python,                                 % the language of the code
+ deletekeywords={exec, super, None},                               % if you want to delete keywords from the given language
+ morekeywords={[2]super},keywordstyle={[2]\bfseries\Mauve},
+ morekeywords={[3]as, None},keywordstyle={[3]\bfseries\Orange},
+ showspaces=false,                                      %
+ showstringspaces=false,                                %
+ showtabs=false,                                        %
+ numbers=left,                                          %
+ stepnumber=1,                                          %
+ breaklines=true,                                       %
+ linewidth=\linewidth,                                  %  
+% showlines=true,                                       %
+% captionpos=b,                                         %
+ xleftmargin=1cm,                                       %
+ xrightmargin=0.3cm,                                      %
+ morekeywords={},                                        %
+ texcl=true,
+ rulecolor=\color{BluePy},
+ morestring=[s][\color{DarkGreen}]{'''}{'''},
+ }
+

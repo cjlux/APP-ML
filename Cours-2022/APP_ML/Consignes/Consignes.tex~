@@ -1,0 +1,339 @@
+\documentclass[11pt,french]{article}
+\usepackage[a5paper,landscape]{geometry}
+\geometry{verbose,tmargin=15mm,bmargin=14mm,lmargin=12mm,rmargin=12mm}
+\usepackage{courier}
+\usepackage{libertine}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[francais]{babel}
+\usepackage{lmodern}
+\usepackage{textcomp}
+\usepackage{listingsutf8}    % listingsutf8 to allow UTF8 accentuated characters !
+\usepackage{graphicx}
+\usepackage{lastpage}
+\usepackage{tabls}
+\usepackage{color}
+\usepackage{colortbl}
+\usepackage{array}
+\usepackage{float}
+\usepackage{makeidx}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{babel}
+\usepackage{alltt}
+\usepackage[table]{xcolor}
+\usepackage{layouts}
+\usepackage{pifont}
+\usepackage[sc]{mathpazo}
+\usepackage{marvosym}
+\usepackage{tikz}
+\usepackage{fancyhdr}
+\usepackage{tabularx}
+\usepackage{wasysym}
+\usepackage{manfnt}
+\usepackage{algorithmic}
+\usepackage{algorithm}
+\pagestyle{fancy}
+\setlength{\parskip}{\smallskipamount}
+\setlength{\parindent}{0pt}
+\usepackage{fancybox}
+\usepackage{calc}
+%\usepackage{setspace}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% User specified LaTeX commands.
+\usepackage{graphics}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{hhline}
+\usepackage{multicol}
+\usepackage{upquote}
+\usepackage{stmaryrd}  % rrbracket et llbracket
+\usepackage[tikz]{bclogo}
+\usepackage[
+  hypertexnames=false, % for correct links (duplicate-error solution)
+  setpagesize=false,   % necessary in order to not change text-/paperformat for the document
+  pdfborder={0 0 0},   % removes border around links
+  %pdfpagemode=FullScreen,% open pdf in full screen mode
+  pdfstartview=Fit% fit page to pdf viewer
+]{hyperref}
+\hypersetup{colorlinks,
+  citecolor = red,
+  filecolor = black,
+  linkcolor =,
+  urlcolor  = blue}
+
+\hyphenpenalty=100000
+
+\input{colors}
+\input{pythonHighlight.tex} % python listing configuration
+
+\lhead{\footnotesize APP -- {\em Machine Learning}}
+\chead{\footnotesize }
+\rhead{\footnotesize Version 2.0 -- 12 avril 2022}
+\lfoot{\fontsize{9}{9}\selectfont\textbf{Arts \& Métiers ParisTech}~-~\textit{Bordeaux}}
+\cfoot{\fontsize{9}{9}\selectfont\thepage~/~\pageref{LastPage}}
+\rfoot{\fontsize{9}{9}\selectfont{UEF 2A -- Mathématiques et Informatique}}
+\renewcommand{\footrulewidth}{0.3pt}
+\renewcommand{\headrulewidth}{0.3pt}
+
+\AtBeginDocument{
+  \renewcommand{\labelitemi}{$\rhd$}
+  \renewcommand{\labelitemii}{$\displaystyle \diamond$}
+  \renewcommand{\labelitemiii}{$\displaystyle \circ$}
+  \renewcommand{\labelitemiv}{--}
+  \renewcommand{\tablename}{T\textsc{ableau}~\no}
+}
+
+\newcommand{\bsh}{\textbackslash}
+\newcommand{\bshbsh}{\textbackslash\textbackslash}
+\newcommand{\chevrons}{\ttfamily>\hspace*{-0.25mm}>\hspace*{-0.25mm}>\hspace*{0.28mm}\xspace}
+\newcommand{\M}[1]{\Mauve{#1}}
+\newcommand{\DG}[1]{\DarkGreen{#1}}
+\newcommand{\DR}[1]{\DarkRed{#1}}
+\newcommand{\B}[1]{\Blue{#1}}
+\newcommand{\BPy}[1]{\BluePy{#1}}
+\newcommand{\VDB}[1]{\VeryDarkBlue{#1}}
+\newcommand{\DO}[1]{\DarkOrange{#1}}
+\newcommand{\Or}[1]{\Orange{#1}}
+\newcommand{\Choco}[1]{\Chocolate{#1}}
+\newcommand*{\truc}{\Gray{\textbullet}}
+
+\newcommand{\bif}[1]{{\ttfamily \M{#1}}}	% Python built in function
+\newcommand{\typ}[1]{{\ttfamily \M{#1}}}  % Python built in type
+\newcommand{\key}[1]{{\ttfamily \Or{#1}}}
+\newcommand{\str}[1]{{\ttfamily \DG{#1}}}
+\newcommand{\com}[1]{{\ttfamily \DR{#1}}}
+\newcommand{\out}[1]{{\ttfamily \B{#1}}}
+\newcommand{\command}[1]{{\ttfamily \Choco{#1}}}
+\newcommand{\code}[1]{{\ttfamily \Choco{#1}}}
+\newcommand{\file}[1]{{\ttfamily \VDB{#1}}}
+
+\newcommand{\bifBF}[1]{\textbf{\bif{#1}}}	% Python built in function
+\newcommand{\typBF}[1]{\textbf{\typ{#1}}}  % Python built in type
+\newcommand{\keyBF}[1]{\textbf{\key{#1}}}
+\newcommand{\strBF}[1]{\textbf{\str{#1}}}
+\newcommand{\comBF}[1]{\textbf{\com{#1}}}
+\newcommand{\outBF}[1]{\textbf{\out{#1}}}
+\newcommand{\commandBF}[1]{\textbf{\command{#1}}}
+\newcommand{\codeBF}[1]{\textbf{\code{#1}}}
+\newcommand{\fileBF}[1]{\textbf{\file{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\setlist[itemize]{leftmargin=5mm,itemsep=0mm}
+\setlist[enumerate]{leftmargin=5mm,itemsep=0mm}
+
+\renewcommand{\ttdefault}[0]{lmtt}
+\newcommand{\boldtt}[1]{{\ttfamily\bfseries #1}}
+
+\newcommand{\QtLogo}[0]{\includegraphics[width=17pt]{Images/QtLogo.projet}}
+\newcommand{\PyQt}[0]{\boldtt{PyQt5}}
+\newcommand{\Qt}[0]{\boldtt{Qt}}
+
+\begin{center}
+\setlength{\fboxsep}{5mm}
+\setlength{\fboxrule}{0.2mm}
+\fbox{\Large Unité d'enseignement {\bf\emph{Mathématiques et informatique}}}
+
+\medskip
+\fcolorbox{Gray}{LightGray}{
+  \begin{tabular}{c}
+    {\LARGE Apprentissage Par Projet}\\[3mm]
+    {\Mauve{\LARGE {Entraîner un réseau de neurones à classifier des images}}}
+  \end{tabular}
+  }
+\end{center}
+
+\section*{Acquis d'apprentissage visés}
+
+À la fin de cet apprentissage par projet de 3 séances de 3 heures, chaque étudiant saura :
+\begin{itemize}
+\item[$\rhd$] Programmer en langage Python un réseau de neurones (dense ou convolutif) dédié à la classification d'images
+  en utilisant les modules \boldtt{tensorflow2} et \boldtt{keras}.
+\item[$\rhd$] Constituer une banque de données d'entraînement et de test.
+\item[$\rhd$] Conduire l'entraînement supervisé d'un réseau de neurones en utilisant une banque de données spécifique.
+\item[$\rhd$] Exploiter en situation opérationnelle un réseau de neurones entraîné.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\textbf{\Large\ding{220} Planification suggérée des 3 séances d'APP}
+
+Au cours des 3 séances, les étudiants travaillent en autonomie par équipe de 3 ou 4
+avec leurs ordinateurs portables, dans un \textbf{Environnement Virtuel Python}
+(EVP) \DarkRed{\boldtt{minfo\_ml}} spécialement créé pour cet APP.
+\vspace*{-4mm}
+\begin {bclogo}[noborder=true, couleurBarre=DarkGreen, logo=\large\ding{220}]{}
+  \vspace*{-4mm}\boldtt{Travail préliminaire} : à faire avant les 3 séances avec un accès Internet haut-débit\\[-5mm]
+  \begin{itemize}
+  \setlength{\parsep}{-0.2mm}\setlength{\itemsep}{-0.4mm}    
+    \item Télécharger les documents de travail depuis l'ENT SAVOIR.
+    \item Créer l'EVP \DarkRed{\boldtt{minfo\_ml}} puis installer les modules Python nécessaires au {\em Machine Learning} (détails page suivante).
+  \end{itemize} 
+\end{bclogo}  
+%
+\vspace*{-8mm}
+\begin {bclogo}[noborder=true, couleurBarre=Chocolate, logo=\large\ding{220}]{}
+  \vspace*{-4mm}\boldtt{Séance 1 : auto-formation}\\[-5mm]
+  \begin{itemize}
+    \item travail personnel avec les {\em notebooks} \file{ML1$\cdots$.ipynb} pour apprendre à charger les images MNIST, construire un réseau de neurones dense et l'entraîner à reconnaître les images du MNIST.
+    \item travail personnel avec les {\em notebooks} \file{ML2$\cdots$.ipynb} pour apprendre à construire un réseau de neurones convolutif et l'entraîner à reconnaître les images du MNIST.
+  \end{itemize}
+\end{bclogo}  
+%
+\vspace*{-8mm}
+\begin {bclogo}[noborder=true, couleurBarre=Chocolate, logo=\large\ding{220}]{}
+  \vspace*{-4mm}\boldtt{Séance 2 : fin auto-formation, début projet}\\[-5mm]
+  \begin{itemize}
+    \item travail avec les {\em notebooks} \file{ML2$\cdots$.ipynb}, suite et fin.
+    \item \textbf{Projet} : constitution d'une banque de données (images ou autre) propre à l'équipe, entraînement supervisé d'un réseau de neurones à classifier les données choisies, exploitation en situation opérationnelle du réseau de neurones entraîné.
+  \end{itemize}
+\end{bclogo}  
+%
+\vspace*{-8mm}
+\begin {bclogo}[noborder=true, couleurBarre=Chocolate, logo=\large\ding{220}]{}
+  \vspace*{-4mm}\boldtt{Séance 3 : fin du projet}\\[-5mm]
+  \begin{itemize}
+    \item suite et fin du projet. Préparation du rendu.
+    \item Dernière heure : Évaluation finale, rendu du projet par équipe.
+  \end{itemize}
+\end{bclogo}  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\vspace*{-16mm}
+\section*{\ding{220} Travail péliminaire -- Télécharger les documents, configurer l'EVP \DarkRed{\boldtt{minfo\_ml}}, s'auto-former aux réseaux de neurones}
+
+\vspace*{-1mm}Télécharge l'archive \file{APP-ML$\cdots$.zip} depuis la plate-forme SAVOIR et \Chocolate{\textbf{extrait}} le dossier \file{APP-ML} sur ton ordinateur portable. Une fois extrait, le contenu du dossier \file{APP-ML} est le suivant :
+\vspace*{-3mm}
+\begin {bclogo}[noborder=true, couleurBarre=Chocolate, logo=\bcinfo]{}
+  \vspace*{-5mm}%
+  \begin{description}
+ \setlength{\parsep}{-0.2mm}\setlength{\itemsep}{-0.2mm}    
+ \item[Dossier \file{Cours}] : contient le fichier PDF de l'amphi "Comprendre et utiliser le {\em Machine Learning}".
+ \item[Dossier \file{Notebook}] : contient les {\em notebooks} d'auto-formation \file{ML1$\cdots$.ipynb} et \file{ML2$\cdots$.ipynb}.
+ \item[Fichier \file{Consignes.pdf}] : le présent document.
+ \item[Fichier \file{requirements.txt}] : liste les modules Python nécessaires au travail de l'APP.
+\end{description}
+\end{bclogo}  
+%
+\vspace*{-8mm}
+\begin {bclogo}[noborder=true, couleurBarre=Chocolate, logo=\bctrombone]{}
+\vspace*{-4mm}\textbf{Créer et configurer l'Environnement Virtuel Python \DarkRed{\boldtt{minfo\_ml}}}\\[-5mm]
+  \begin{itemize}
+    \item Ouvre une console "Anaconda Prompt" (Windows) ou un terminal (Mac ou Linux).
+    \item Créé l'EVP  \DarkRed{\boldtt{minfo\_ml}} en tapant la commande : \commandBF{conda create -n minfo\_ml python=3.8}\\
+  puis réponds aux questions pour télécharger et installer les paquets Python...
+    \item Active l'EVP \DarkRed{\boldtt{minfo\_ml}} en tapant la commande : \commandBF{conda activate minfo\_ml}
+\end{itemize}
+Les modules nécessaires à l'APP sont ensuite installés en utilisant le fichier \file{requirements.txt} :\\[-6mm]
+\begin{itemize}
+  \item Positionne-toi dans le dossier \file{APP-ML} :\\
+(Windows) $\leadsto$ \commandBF{cd C:\bsh<chemin du dossier APP-ML copié-collé avec le navigateur de fichiers>}\\
+(Mac/Linux) $\leadsto$ \commandBF{cd /home/$\cdots$/APP-ML}
+  \item Charge les modules en tapant la commande : \commandBF{pip install -r requirements.txt}\\
+  Les modules et leurs dépendances sont téléchargés et installés...
+  \item Complèter l'installation en tapant la commande :%
+  \commandBF{conda install numpy pydot pydotplus}
+\end{itemize}
+\end{bclogo}  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{\ding{220} Séance 1 -- Auto-formation au {\em Machine Learning}}
+
+Chaque étudiant doit s'auto-former en travaillant les {\em notebooks} avec un processus {\em jupyter notebook} lancé dans l'EVP \DarkRed{\boldtt{minfo\_ml}}:
+  
+\ding{220} \textbf{Auto-formation: travail personnel avec les {\em notebooks} \file{ML1$\cdots$.ipynb}}
+
+Ces {\em notebooks} permettent d'acquérir les savoir-faire nécessaires à la construction d'un réseau de neurones dense et à son entraînement pour reconnaître les images de chiffres écrits à la main de la banque d'images MNIST.
+\begin{itemize}
+\item \file{ML1\_EVP.ipynb} $\leadsto$ vérifier le bon fonctionnement de l'EVP \DarkRed{\boldtt{minfo\_ml}}
+\item \file{ML1\_MINIST.ipynb} $\leadsto$ apprendre à charger et utiliser la banque de données MNIST.
+\item \file{ML1\_DNN.ipynb} $\leadsto$ construire un réseau dense et l'entraîner
+\end{itemize}
+
+Tu devrais avoir le temps dans la première séance de voir tous les {\em notebook} \file{ML1$\cdots$.ipynb}
+  et de commencer les {\em notebook} \file{ML2$\cdots$.ipynb}\ldots
+
+\smallskip
+\ding{220} \textbf{Auto-formation: travail avec les {\em notebooks} \file{ML2$\cdots$.ipynb}}
+
+Ces {\em notebook} permettent d'acquérir les savoir-faire nécessaires à la construction d'un réseau de neurones convolutif et à son entraînement à reconnaître des images du MNIST.
+\begin{itemize}
+\item \file{ML2$\cdots$.ipynb} : cdccqsqscqs
+\item \file{ML2$\cdots$.ipynb} : cdccqsqscqs
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{\ding{220} Séance 2 -- Fin de l'auto-formation, début du projet}
+
+\ding{220} \textbf{Fin de l'auto-formation avec les {\em notebooks} \file{ML2$\cdots$.ipynb}}
+
+\medskip
+\ding{220} \textbf{Projet : Entraîner un réseau de neurone avec une banque de données spécifique}
+
+Pour ce projet d'équipe, les étapes sont :
+\begin{enumerate}
+\item Choix d'une \textbf{banque de données spécifique} à votre projet à trouver sur Internet (images ou autre...).
+\item Choix du réseau (dense ou convolutif) à entraîner, en utilisant les acquis d'apprentissage de votre auto-formation.
+\item Entraînement supervisé du réseau de neurones avec la banque de données choisie, évaluation avec des données de test des performances du réseau entraîné.
+\item Si possible, performance du réseau à classifier de nouvelles données (hors banque de données d'entraînement ou de test choisie).  
+\end{enumerate}
+
+Le projet est conduit par l'équipe qui doit répartir entre ses membres les tâches à réaliser pour le projet.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{\ding{220} Séance 3 : projet et rendu}
+
+\medskip
+\ding{220} \textbf{Projet : Entraîner un réseau de neurone avec une banque de données spécifique}
+
+Suite et fin du projet.
+
+\medskip
+\ding{220} \textbf{Préparation du notebook de rendu du projet}
+
+L'équipe prépare un rendu sous la forme d'un {\em notebook} présentant les principales étapes du projet et les résultats obtenus.
+
+Le {\em notebook} rendu pourra être créé par "copié/collé/modifié" de cellules des {\em notebooks} travaillés.\\
+Le fichier \file{template.ipynb} donne des exemples de mise en forme en utilisant des cellules {\em Markdown}.
+
+Le {\em notebook} rendu devra à minima présenter les points suivants :
+\begin{itemize}
+\item Structure et contenu de la banque de données choisie.
+\item Structure et entraînement du réseau de neurones choisi : stratégie d'entraînement et d'évaluation, résultats (courbes de performance...).
+\item Si possible, performance du réseau à classifier de nouvelles données (hors banque de données d'entraînement ou de test).
+\end{itemize}
+
+\medskip
+Le {\em notebook} de l'équipe est envoyé à l'enseignant au plus tard une semaine après la dernière séance.
+
+\bigskip
+Critères d'évaluation du rendu: \\
+- aptitude à mettre en oeuvre les acquises d'apprentissage visés;\\
+- aptitude à présenter le contenu du projet;\\
+- aptitude à présenter et critiquer les résultats obtenus.\\
+\end{document}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section*{\ding{220} Séance 3 : fin du projet et rendu}
+
+\ding{220} \textbf{Fin du projet, préparation du rendu}
+
+L'équipe prépare un rendu sous la forme de 9 diapositives au maximum présentant les principales étapes du projet et les résultats obtenus à chaque étape.\\
+
+Le rendu est présenté à l'enseignant chargé d'évaluer l'équipe pendant la dernière demi-heure de la séance 3.
+
+\bigskip
+Critères d'évaluation : \\
+- aptitude à mettre en oeuvre les compétences acquises;\\
+- aptitude à présenter le contenu du projet ;\\
+- aptitude à critiquer les résultats obtenus ;\\
+- aptitude individuelle à répondre aux questions.\\
+\end{document}
+

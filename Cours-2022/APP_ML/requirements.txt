@@ -1,0 +1,10 @@
+# requirements based on Ubuntu 20 with python3.6.9
+tensorflow==2.4.1
+matplotlib
+#pandas==1.1.5
+jupyter==1.0.0
+opencv-python==4.5.1.48
+#testresources==2.0.1
+#scikit-learn==0.24.2
+#scikit-image==0.17.2
+#seaborn==0.11.1

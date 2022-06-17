@@ -1,0 +1,414 @@
+\documentclass[12pt,serif,mathserif,compress]{beamer}
+\usepackage{pgf}
+\usepackage{pgfpages}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage{comment}
+\usepackage{geometry}
+\usepackage[most]{tcolorbox}
+\tcbuselibrary{skins}
+\usepackage{beamerthemesplit}
+\usepackage{amsmath, amsfonts, epsfig, xspace}
+\usepackage{pstricks,pst-node}
+\usepackage{multimedia}
+\usepackage{wasysym}
+
+\usepackage{graphicx}% for including figures
+\usepackage{tikz}
+\usetikzlibrary{positioning,decorations.pathreplacing,arrows}
+
+\input{colors}
+\input{commands}
+
+\usetheme{jlcKeynote}
+\useoutertheme[subsection=false]{miniframes}
+\setbeamercolor{background canvas}{bg=gray!50!white}
+\setbeamercolor{structure}{bg=white, fg=gray}
+\setbeamertemplate{itemize items}{\gray{$\CIRCLE$}}
+
+\title[\hspace*{.5\linewidth}\insertframenumber/\inserttotalframenumber]
+      {\fontsize{17}{17}\selectfont{Understanding \& using \\[2mm] \textbf{Deep Reinforcement Learning (DRL)}}}
+\subtitle{Season 2 -- DQN algorithm}
+\author[JLC -- {\tiny{nov 2018}} \hfill]{{Jean-Luc.Charles\,@\,ENSAM.EU}\\[1mm]\includegraphics[height=1.1cm]{images/Logo_AMPT_Bordeaux-2.png}}
+\institute{}
+\date{}
+\titlegraphic{\vspace*{-1.6cm}\includegraphics[height=3.cm]{images/robot.png}}
+
+\logo{}
+\tcbset{enhanced, boxrule=0.2pt, sharp corners, drop lifted shadow, colback=Chocolate!25!white,colframe=Chocolate!75!black, fonttitle=\large}
+
+\renewcommand\ttdefault{lmtt}
+
+\begin{document}
+
+\frame[plain]{\titlepage}
+
+\setbeamercolor{structure}{fg=gray!50!white}
+
+\section{Reinforcement Learning}
+
+%===============================================================================
+\begin{frame}{Machine Learning in Artificial intelligence}
+  \includegraphics[width=\textwidth]{images/AI-from_MachineLearningForHumans-DRL.png}\\
+  {\centering\tiny (figure from \href{https://medium.com/machine-learning-for-humans/why-machine-learning-matters-6164faf1df12}
+                  {medium.com/machine-learning-for-humans/why-machine-learning-matters-6164faf1df12})}
+\end{frame}
+%===============================================================================
+
+\subsection*{Why}
+
+%===============================================================================
+\begin{frame}{Why learn RL ?}
+  \begin{itemize}
+  \item <1-> Not just for games
+  \item <1-> Make optimal decisions
+  \item <1-> Solve problems
+  \item <1-> Control/command algorithms
+  \item <1-> It's novel
+  \item <1-> Has a large potential for advancing AI
+  \end{itemize}
+\end{frame}
+%===============================================================================
+
+%===============================================================================
+\begin{frame}{Where can we use RL ?}
+  \begin{itemize}
+  \item <1-> Robotics 
+  \item <1-> Self-driving cars
+  \item <1-> Inventory management
+  \item <1-> Financial investments
+  \item <1-> Medicinal diagnostic
+  \item <1-> Decision-based situations
+  \item <1-> Natural language processing
+  \item <1-> Computer vision
+  \item <1-> Internet of things
+  \item <1-> ...
+  \end{itemize}
+\end{frame}
+%===============================================================================
+
+\subsection{RL main ingredients}
+
+%===============================================================================
+\begin{frame}
+  \begin{tcolorbox}[title=RL main ingredients,fonttitle=\Large]
+    
+    \includegraphics[width=.9\textwidth]{images/RL-2.png}
+    
+      \bigskip
+      \centering\bfdarkchoco{Agent -- action -- Environment -- state -- reward}
+  \end{tcolorbox}  
+\end{frame}
+%===============================================================================
+
+%===============================================================================
+\begin{frame}
+  \begin{tcolorbox}[title=RL:  \textbf{Agent} -- Environnement]
+    The \bfdarkchoco{Agent} is the \bfdarkchoco{algorithm}:
+    \begin{itemize}
+    \item <2-> Monitors the \bfdarkchoco{Environment}
+    \item <3-> Decides wich \bfdarkchoco{action} to be taken
+    \item <4-> Action can be\\
+      \bfdarkchoco{discrete}: on/off, left/right...\\
+      \bfdarkchoco{continuous}: force/velocity applied....
+    \end{itemize}
+  \end{tcolorbox}
+  \bigskip
+  \visible<5->{\Chocolate{Dicrete} versus \Chocolate{continuous} action involves very different algorithms for the learning stage}
+\end{frame}
+%===============================================================================
+
+%===============================================================================
+\begin{frame}
+  \begin{tcolorbox}[title=RL: Agent -- \textbf{Environnement}]
+    The \bfdarkchoco{Environment} is what the Agent wants to monitor:    
+    \begin{itemize}
+    \item <2-> receives \bfdarkchoco{actions} from the Agent
+    \item <3-> takes a new \bfdarkchoco{state} under the Agent's action
+    \item <4-> gives back its new \bfdarkchoco{state} and a \bfdarkchoco{reward} to the Agent
+    \item <5-> modelized as a \bfdarkchoco{Partially Observable Markov Process}
+    \end{itemize}    
+  \end{tcolorbox}
+\end{frame}
+%===============================================================================
+
+\section{Neural Networks}
+
+%===============================================================================
+\begin{frame}{RL with Artificial Neural Networks}
+
+  \subsection*{}
+
+  Many computing technics can be used to implement the Machine Learning algorithms:
+    \begin{itemize}
+    \item <1-> \textbf{genetic programming}
+    \item <1-> \textbf{Bayesian inference}, Fuzzy logic
+    \item <1-> \textbf{Artificial Neural Networks}
+    \item <1-> ...
+    \end{itemize}    
+
+    \bigskip
+    \visible <2->{We will focus on \bfdarkchoco{Artificial Neural Networks}.}
+\end{frame}
+%===============================================================================
+
+\subsection*{Artificial neuron principle}
+
+%===============================================================================
+\begin{frame}
+  
+  \tikzset{%
+  neuron/.style={
+    circle,
+    draw,
+    minimum size=1cm,
+    font=\large
+  },
+  squa/.style={
+    draw,
+    inner sep=2pt,
+    font=\large,
+    join = by -latex
+  },
+  }
+  \begin{tcolorbox}[title=The Artificial neuron model]  
+    \hspace*{-.7cm}
+    \begin{tikzpicture}[x=1.4cm, y=1.cm]
+
+      \node [label=above:\parbox{2cm}{\centering Input\\stimuli}] at (0, 1.5) (x1)  {$x_1$};
+      \node [] at (0, 0.5) (x2) {$x_2$};
+      \node [] at (0, -0) (vdots) {$\vdots$};
+      \node [] at (0, -0.7) (xn) {$x_n$};
+      \node [label=above:\parbox{2cm}{\centering Bias}] at (2, 2) (bias) {$b$};
+      \node [label=above:\parbox{2cm}{\centering Output}] at (4, 0.15) (y) {$y = f(\sum_i{w_{i}\,x_i} - b)$};
+      
+      \node [neuron/.try] (output) at (2,0.15) {\large{$\displaystyle{\Sigma | f}$}};
+      
+      \draw [o-latex] (x1) -- (output);
+      \draw [o-latex] (x2) -- (output);
+      \draw [o-latex] (xn) -- (output);
+      \draw [o-latex] (bias) -- (output);
+      \draw [->] (output) -- (y);
+
+      \node [] at (1,1) () {$w_1$} ;
+      \node [] at (1,.5) () {$w_2$} ;
+      \node [] at (1, -0.45) () {$w_n$} ;
+    \end{tikzpicture}
+  \end{tcolorbox}
+  \smallskip
+  \visible<2->{An \bfdarkchoco{artificial neuron}:
+    \begin{itemize}
+    \item <3-> receives the input stimuli $(x_{i})_{i=1..n}$ with \textbf{weights} $(w_i)$
+    \item <4-> computes the \textbf{weighted sum} of the input $\sum_i{w_{i}\,x_i}$
+    \item <5-> outputs its \textbf{activation} $f(\sum_i{w_{i}\,x_i} - b)$, with $f$ a non-linear function.
+    \end{itemize}
+  }
+
+\end{frame}
+%===============================================================================
+
+\subsection{Activation functions}
+
+%===============================================================================
+\begin{frame}{Activation functions}
+
+  TODO \\
+  ideas:\\
+    threshold activation function\\
+    unit step activation function\\
+    sigmoid activation function - differentiable \\
+    linear activation function \\
+    Gaussian activation function \\
+    relu activation function
+
+
+\end{frame}
+%===============================================================================
+
+\subsection{Artificial Neural Networks}
+
+%===============================================================================
+\begin{frame}{Neural Networks}
+
+  Feed-Forward Network (Single Layer  or Multiple Layer)
+  Reccurent Network
+  
+\end{frame}
+%===============================================================================
+
+%===============================================================================
+\begin{frame}{Neural Networks Architecture}
+  
+  
+\end{frame}
+%===============================================================================
+
+\subsection{NN learning}
+
+%===============================================================================
+\begin{frame}{Neural Networks learning}
+  
+\end{frame}
+%===============================================================================
+
+\section{OpenAI}
+
+%===============================================================================
+\begin{frame}{\\[-4mm] \includegraphics[width=.2\textwidth]{images/openai-homepage.png} }
+  \begin{tcolorbox}[title=Who is OpenAI ? What do they do ?]
+    non profit artificial intelligence research company :
+    \setbeamertemplate{itemize items}{\Chocolate{$\CIRCLE$}}
+    \begin{itemize}
+    \item build safe AGI (Artificial General Intelligence)
+    \item ensure AGI's benefits are as widely and evenly distributed as possible
+    \item Create open-source software
+    \item Decision-based situations
+    \end{itemize}
+  \end{tcolorbox}  
+  \setbeamertemplate{itemize items}{\gray{$\CIRCLE$}}
+\end{frame}
+%===============================================================================
+
+\section{The CartPole problem}
+
+\subsection{The CartPole}
+%===============================================================================
+\begin{frame}{The CartPole problem}
+  
+\end{frame}
+%===============================================================================
+
+\subsection{Solving CartPole with OpenAI Gym DQN}
+%===============================================================================
+\begin{frame}{Solving CartPole with OpenAI Gym DQN}
+  
+\end{frame}
+%===============================================================================
+
+\subsection{V-REP simulation}
+
+%===============================================================================
+\begin{frame}{V-REP}
+  
+\end{frame}
+%===============================================================================
+
+%===============================================================================
+\begin{frame}{V-REP CartPole Simulation}
+  
+\end{frame}
+%===============================================================================
+
+%===============================================================================
+\begin{frame}{V-REP Python API}
+  
+\end{frame}
+%===============================================================================
+
+%===============================================================================
+\begin{frame}{OpenAI Gym with V-REP CartPole simulation}
+  
+\end{frame}
+%===============================================================================
+
+\section{The real CartPole}
+
+\subsection{CartPole banc}
+
+%===============================================================================
+\begin{frame}{CartPole banc}
+  
+\end{frame}
+%===============================================================================
+
+\subsection{CartPole banc driving with Arduino}
+
+%===============================================================================
+\begin{frame}{CartPole banc driving with Arduino}
+  
+\end{frame}
+%===============================================================================
+
+%===============================================================================
+\begin{frame}{CartPole banc driving with Arduino \& DQN}
+  
+\end{frame}
+%===============================================================================
+
+
+
+\end{document}
+
+\begin{frame}
+  \only<1>{Salut c'est only, je suis présent qu'au premier slide.\\}
+  \visible<2->{Salut c'est visible, je suis visible à partir du slide 2.\\}
+  \uncover<3->{Salut c'est uncover, je suis découvert à partir du slide 3.\\}
+  \invisible<2-4>{Salut c'est invisible, je serais invisible du slide 2 au slide 4.\\}
+  \alt<2>{Salut, je suis le alt qui sera au slide 2.\\}{Salut je suis le alt qui sera aux autres slides que la 2.\\}
+  \temporal<2-3>{Salut je suis le temporal visible du slide 1}{Et moi le temporal visible du slide 2 au slide 3}{Et moi le temporal visible après le slide 3}
+\end{frame}
+
+%\begin{itemize}
+%\item Reinforcement Learning (RL) is a branch of Machine Learning \visible<2->{a branch of Artificial Intelligence}
+%\item <3-> RL involves an \textbf{agent} and an \textbf{environement}
+%\item <4-> The \textbf{agent} learns optimal actions for maximizing \textbf{reward} given by the \textbf{environement}
+%\end{itemize}
+
+Le cerveau humain possède 100 milliards de neurones avec 20 000 synapses par neurone....
+
+
+==========================================================================================================
+\begin{frame}{Artificial neuron principle}
+  
+  \tikzset{%
+  neuron/.style={
+    circle,
+    draw,
+    minimum size=1cm,
+    font=\large
+  },
+  squa/.style={
+    draw,
+    inner sep=2pt,
+    font=\large,
+    join = by -latex
+  },
+}
+\hspace*{-.7cm}
+\begin{tikzpicture}[x=1.4cm, y=1.cm]
+
+  \node [label=above:\parbox{2cm}{\centering Input\\stimuli}] at (0, 1.5) (x1)  {$x_1$};
+  \node [] at (0, 0.5) (x2) {$x_2$};
+  \node [] at (0, -0) (vdots) {$\vdots$};
+  \node [] at (0, -0.7) (xn) {$x_n$};
+  \node [label=above:\parbox{2cm}{\centering Bias}] at (2, 2) (bias) {$b$};
+  \node [squa, label=above:{\parbox{2cm}{\centering Activation\\function}}] at (4.1, 0.15) (F) {$f$};
+  \node [label=above:\parbox{2cm}{\centering Output}] at (5.8, 0.15) (y) {$y = f(\sum_i{w_{i}\,x_i} - b)$};
+  
+  \node [neuron/.try] (output) at (2,0.15) {\Huge{$\displaystyle\Sigma$}};
+  
+  \draw [o-latex] (x1) -- (output);
+  \draw [o-latex] (x2) -- (output);
+  \draw [o-latex] (xn) -- (output);
+  \draw [o-latex] (bias) -- (output);
+  \draw [->] (output) -- (F);
+  \draw [->] (F) -- (y);
+
+  \node [] at (1,1) () {$w_1$} ;
+  \node [] at (1,.5) () {$w_2$} ;
+  \node [] at (1, -0.45) () {$w_n$} ;
+  \node [] at (3, 0.3) () {\tiny{$\sum_i{w_{i}x_i} - b$}};
+\end{tikzpicture}
+
+\bigskip
+\visible<2->{An \bfdarkchoco{artificial neuron}:
+\begin{itemize}
+\item <3-> receives the input stimuli $(x_{i})_{i=1..n}$ through \textbf{weights} $w_i$
+\item <4-> computes the \textbf{weighted sum} of the input, minus a \textbf{bias} $b$
+\item <5-> outputs its \textbf{activation} $f(\sum_i{w_{i}\,x_i} - b)$, with $f$ a non-linear function.
+\end{itemize}
+}
+
+\end{frame}
+=============================================================================================
