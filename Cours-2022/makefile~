@@ -1,5 +1,0 @@
-all: clean
-	pdflatex Cours-ML.pdf && evince Cours-ML.pdf
-
-clean:
-	rm -f *.aux *.toc *.log *.nav *.out *.snm
