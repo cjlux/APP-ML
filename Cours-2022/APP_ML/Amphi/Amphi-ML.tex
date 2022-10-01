@@ -40,7 +40,7 @@
 \title[\hspace*{.8\linewidth}\insertframenumber/\inserttotalframenumber]
       {\fontsize{20}{20}\selectfont{Apprentissage Par Projet [APP]\\[3mm]Comprendre et utiliser le\\ \em{Machine learning}}}
 %\subtitle{novembre 2021}
-      \author[{\tiny avril 2022 -- V2.0}\hspace*{.8\linewidth}]{{\fontsize{8}{8}\selectfont{Jean-Luc.Charles\,@\,ENSAM.EU}}\\[5mm]
+      \author[{\tiny avril 2022 -- V2.1}\hspace*{.8\linewidth}]{{\fontsize{8}{8}\selectfont{Jean-Luc.Charles\,@\,ENSAM.EU}}\\[5mm]
         \includegraphics[height=1.5cm]{images/logo-am-couleur-72dpi.jpg}}
 \institute{}
 \date{{\tiny avril 2022}}
@@ -145,27 +145,103 @@
 \end{frame}
 %===============================================================================
 
+\begin{frame}{Les branches du {\em Machine Learning}}
+
+  \begin{tcolorbox}[title={\em Supervised learning}\\Apprentissage supervisé]
+  Requiert des {\bf données labelisées}...
+    \begin{itemize}
+    \item \textbf{Classification}
+      \begin{itemize}
+      \item Classification d'images
+      \item Détection d'objet sdans des images
+      \item Reconnaissance de la parole...
+      \end{itemize}
+    \item \textbf{Régression}
+      \begin{itemize}
+      \item Prédiction d'une valeur (continue)...
+      \end{itemize}
+    \item \textbf{Détection d'Anomalies}
+      %% anomaliy detection with supervised laerning suppose that there are no "new annomaly" in the
+      %% datat set to process, because the anomalies have been learned and the algorithm will not
+      % reconize new anomaly that was not learned...
+      \begin{itemize}
+      \item Détection de Spam
+      \item Manufacturing: reconnaissance de défauts (appris)
+      \item Prévision du temps
+      \item Classification de maladies...
+      \end{itemize}        
+    \end{itemize}
+  \end{tcolorbox}
+\end{frame}
+%===============================================================================
+
+%===============================================================================
+\begin{frame}{Les branches du {\em Machine Learning}}
+  \begin{tcolorbox}[title={\em Unsupervised learning}\\Apprentissage non-supervisé]
+    Ne requiert que des données (non labelisées)...
+    \begin{itemize}
+    \item \textbf{Clustering} -- \textbf{Regroupement} de données non labelisées 
+      \begin{itemize}
+      \item Data mining, regroupement de données du web, de news...
+      \item Regroupement ADN
+      \item Traitement de données d'astronomie...
+      \end{itemize}        
+    \item \textbf{Detection d'Anomalie}
+      \begin{itemize}
+      \item Détection de fraude
+      \item Manufacturing : détection de défauts (même nouveaux)
+      \item Monitoring : détéction d'activité anormale (panne, hacker, fraude...)
+      \item {\em Fake account} sur Internet...
+      \end{itemize}
+    \item \textbf{Réduction de dimension}
+      \begin{itemize}
+      \item Compression de données...
+      \end{itemize}
+    \end{itemize}
+  \end{tcolorbox}    
+\end{frame}
+%===============================================================================
+
+%===============================================================================
+\begin{frame}{Les branches du {\em Machine Learning}}
+  \begin{tcolorbox}[title={\em Reinforcement learning}\\Apprentissage par renforcement]
+    Un agent (le réseau de neurones) apprend à piloter un environnement (jeu, système mécatronique...)
+    \begin{itemize}
+    \item \textbf{Contrôle/commande}
+      \begin{itemize}
+      \item Contrôle de robots, drones...
+      \item Financial (stock) trading...
+      \end{itemize}        
+    \item \textbf{Prise de décision}
+      \begin{itemize}
+      \item jeux (video games)
+      \item analyse financière...
+      \end{itemize}
+    \end{itemize}
+  \end{tcolorbox}    
+\end{frame}
+%===============================================================================
+
 \subsection{technics}
 
 %===============================================================================
 \begin{frame}{Machine Learning et IA}
 
-
   Plusieurs approches permettent de concevoir des algorithmes de {\em Machine Learning} :
     \begin{itemize}
-    \item <1-> Programmation Génétique ({\em Genetic programming})
-    \item <1-> Inférence bayésienne ({\em Bayesian inference})
-    \item <1-> Logique Floue ({\em Fuzzy logic})
-    \item <1-> Réseaux de neurones ({\em Neural Networks})
-    \item <1-> ...
+    \item Programmation Génétique ({\em Genetic programming})
+    \item Inférence bayésienne ({\em Bayesian inference})
+    \item Logique Floue ({\em Fuzzy logic})
+    \item Réseaux de neurones ({\em Neural Networks})
+    \item ...
     \end{itemize}    
 
     \bigskip
-    \visible <2->{La suite traite uniquement des \bfdarkchoco{Réseau de neurones artificiels}.}
+    \visible <2->{La suite traite uniquement des \bfdarkchoco{Réseaux de neurones artificiels}.}
 \end{frame}
 %===============================================================================
 
-\section{Neural Networks}
+\section{NN}
 
 \subsection{Artificial neuron}
 
@@ -220,9 +296,9 @@
   
   \visible<2->{Un \bfdarkchoco{neurone artificiel}:
     \begin{itemize}
-    \item <3-> reçoit les données d'entrée $(x_{i})_{i=1..n}$ affectées des  \textbf{poids} $(w_i)_{i=1..n}$ ({\em weights}) 
-    \item <4-> calcule la \textbf{somme pondérée} de ses entrées moins le biais $\sum_i{w_{i}\,x_i} - b$
-    \item <5-> produit en sortie une \textbf{activation} $f(\sum_i{w_{i}\,x_i} - b)$, calculée avec une fonction d'activation $f$ (en général non-linéaire).
+    \item <2-> reçoit les données d'entrée $(x_{i})_{i=1..n}$ affectées des  \textbf{poids} $(w_i)_{i=1..n}$ ({\em weights}) 
+    \item <3-> calcule la \textbf{somme pondérée} de ses entrées moins le biais $\sum_i{w_{i}\,x_i} - b$
+    \item <4-> produit en sortie une \textbf{activation} $f(\sum_i{w_{i}\,x_i} - b)$, calculée avec une fonction d'activation $f$ (en général non-linéaire).
     \end{itemize}
   }
 
@@ -255,44 +331,48 @@
 \subsection{Neural Networks}
 
 %===============================================================================
-\begin{frame}{Réseaux de neurones étudiés}
+\begin{frame}{Réseaux de neurones}
 
+  \begin{minipage}{.6\textwidth}
+    \begin{itemize}
+    \item Les réseaux de neurones sont des assemblages plus ou moins complexes de neurones artificiels organisés en couches.
+    \end{itemize}
+  \end{minipage}\begin{minipage}{.4\textwidth}
+    \vspace*{-6mm}\includegraphics[width=\textwidth]{images/RN.png}
+  \end{minipage}
+  
+  Deux architecture sont très souvent utilisées :
   \begin{itemize}
-  \item Les réseaux de neurones sont des assemblages plus ou moins complexes de neurones artificiels\\
-  \includegraphics[width=.2\textwidth]{images/RN.png}
-  \item Deux architectures sont étudiées dans l'APP-ML \footnote{\tiny{Apprentissage Par Projet}}
-  pour la classification des images :
-
-  \begin{itemize}
-  \item Les \textbf{réseaux denses}, simples, généralistes, pouvant procurer un score voisin de 95\% de réussite.
-  \item Les \textbf{réseaux convolutifs} plus complexes,  spécialisés dans le traitement des images,
-    pouvant atteindre un score de 99\%.
-  \end{itemize}       
-  \end{itemize}       
-
+    \item \textbf{Réseau de Neurones Dense} ({\em Dense Neural Network, RND})\\
+      simple, généraliste, peut atteindre des scores de réussite importants.
+    \item \textbf{Réseau de Neurones Convolutif} ({\em Convolutional Neural Network, CNN})\\
+      plus complexe, spécialisé dans le traitement des images, peut atteindre des scores supérieurs à 99\% dans la reconnaissance d'images.
+  \end{itemize}
   
 \end{frame}
 %===============================================================================
 
 %===============================================================================
-\begin{frame}{Données utilisées pour entraîner les réseaux}
+\begin{frame}{Données utilisées pour l'APP}
 
   \begin{itemize}
-  \item \href{http://yann.lecun.com/exdb/mnist/}{MNIST} : banque de 70000 \textbf{images labellisées}\\[3mm]
-    \includegraphics[width=0.7\textwidth]{images/MNIST_digits_sample.png}
+  \item \href{http://yann.lecun.com/exdb/mnist/}{MNIST} banque de 70000 \textbf{images labellisées}\\
+    (60000 images d'entraînement -- 10000 images de test.\\[3mm]
+    \includegraphics[width=0.6\textwidth]{images/MNIST_digits_sample.png}
   \item Images en ton de gris de 28 $\times$ 28 pixels
-  \item 60000 images d'entraînement et 10000 images de test.
+  \item Réseau dense $\leadsto$ scores pouvant atteindre 98 \% de succès...
+  \item État de l'art pour la reconnaissance d'image : réseau convolutifs
   \end{itemize}       
   
 \end{frame}
 %===============================================================================
 
-\section{Dense NN}
+\section{Classification images MNIST par réseau dense}
 
 \subsection{Architecture}
 
 %===============================================================================
-\begin{frame}{1 - Réseau de neurones dense}
+\begin{frame}{1 - Réseau de neurones dense (séquentiel)}
 
   {\footnotesize Chaque matrice 28$\,\times\,$28 $\leadsto$ vecteur normalisé de 784 composantes \texttt{float} $\in [0;1]$.}
 
@@ -301,13 +381,12 @@
   {\footnotesize
     Constitution du réseau :
   \begin{itemize}
-  \item Une couche d'entrée ({\em Input layer}) fixe la dimension des entrées du réseau à 784 valeurs. Elle ne comporte aucun neurone.
-  \item Une couche cachée ({\em Hidden layer}) de 784 neurone (on pourrait en avoir plus, ou moins...), reçoit les données d'entrées. Elle est connectées à la couche suivante.
-  \item Une couche de sortie ({\em Output layer}) de 10 neurones (1 neurone pour chaque chiffre à reconnaître).
+  \item La couche d'entrée ({\em Input layer}) fixe la dimension des entrées du réseau à 784 valeurs. {\bf Elle ne comporte aucun neurone !}
+  \item Une couche "cachée" ({\em Hidden layer}) de 784 neurone (on pourrait en avoir plus, ou moins...), reçoit les données d'entrées. Elle est connectée à la couche suivante.
+  \item La couche de sortie ({\em Output layer}) contient 10 neurones (1 neurone pour chaque chiffre à reconnaître).
   \end{itemize}
   }
 
-  
 \end{frame}
 %===============================================================================
 
@@ -319,7 +398,7 @@
 
   \begin{itemize}
     
-  \item Dans les couches intermédiaires la fonction d'activation {\em relu} favorise souvent l'apprentissage du réseau
+  \item Dans les couches intermédiaires ("cachées") la fonction d'activation {\em relu} favorise souvent l'apprentissage du réseau
     \footnote{{\tiny évite le {\em vanishing gradient} qui apparaît dans
         l'algorithme de {\em back propagation}}}.
 
@@ -345,7 +424,7 @@
   \end{tcolorbox}
 
   \vspace*{-1mm}
-  \visible<2>{Le neurone de plus grande probabilité (activation) donne la réponse du réseau par son label associé.}
+  La réponse du réseau est le label associé au neurone de plus grande probabilité (activation).
 
 \end{frame}
 %===============================================================================
@@ -388,9 +467,9 @@
   \begin{tcolorbox}[title=Fonction d'erreur : {\em Cross entropy error}]  
 
     \begin{itemize}
-    \item Une image traitée par le réseau $\leadsto$ vecteur $Y$ de 10 \texttt{float} à comparer au codage {\em hot-one} $Y'$ du label de l'image.
-    \item On utilise la fonction d'erreur (ou de perte) {\em cross entropy} adaptée au codage {\em one-hot} : $e(Y,Y')=-\sum_i Y^{'}_i\log(Y_i)$\\
-      \includegraphics[width=.9\textwidth]{images/CrossEntropy-error-jlc.png}
+    \item Une image traitée par le réseau $\leadsto$ vecteur $\hat{Y}$ de 10 \texttt{float} à comparer au codage {\em hot-one} $Y$ du label de l'image.
+    \item On utilise la fonction d'erreur (ou de perte) {\em cross entropy} adaptée au codage {\em one-hot} : $e(Y,\hat{Y})=-\sum_i Y_i\ log(\hat{Y}_i)$\\
+      \includegraphics[width=.9\textwidth]{images/CrossEntropyError.png}
     \end{itemize}
 
   \end{tcolorbox}
@@ -406,11 +485,11 @@
   \begin{tcolorbox}[title=Optimisation et {\em Back Propagation}]  
 
     \begin{itemize}
-        \visible<1->{\item Pendant la phase d'apprentissage un algorithme d'optimisation calcule le gradient de la fonction de perte
+        \visible<1->{\item Pendant la phase d'apprentissage un algorithme d'optimisation calcule le gradient de la fonction d'erreur 
             par rapport aux poids du réseau.}
-        \visible<2->{\item L'algorithme de {\em Back Propagation} \textbf{modifie} les poids du réseau couche par couche grâce au gradient de la fonction de perte,
+        \visible<2->{\item L'algorithme de {\em Back Propagation} \textbf{modifie} les poids du réseau couche par couche grâce au gradient de la fonction d'erreur,
             en itérant de la dernière couche à la première couche. }
-        \visible<3->{\item Exemples d'algorithme d'optimisation utilisés : 
+        \visible<3->{\item Exemples d'algorithme d'optimisation : 
         \begin{itemize}
         \item Descente de Gradient ({\em Gradient Descent (GD)})
         \item Descente de Gradient Stochastique ({\em Stochastic Gradient Descent (SGD)})
@@ -443,44 +522,41 @@
 \end{frame}
 %===============================================================================
 
-\subsection{work in APP-ML}
+\section{APP}
 
 %===============================================================================
-\begin{frame}{1 - Réseau de neurones dense}
+\begin{frame}{Mise en oeuvre dans l'APP}
 
-  \begin{tcolorbox}[title=Mise en oeuvre dans l'APP-ML]
+  \begin{tcolorbox}[title=1 -- Auto-formation/ Réseau dense]
     \begin{itemize}
-    \item Les trois {\em notebooks} \DarkBlue{\texttt{ML1\_MNIST.ipynb}}, \DarkBlue{\texttt{ML2\_DNN.ipynb}} et \DarkBlue{\texttt{ML3\_DNN\_suite.ipynb}}  proposés sur SAVOIR
-      visent les savoir-faire :
+    \item Les trois {\em notebooks} \DarkBlue{\texttt{ML1\_MNIST.ipynb}},
+      \DarkBlue{\texttt{ML2\_DNN.ipynb}} et \DarkBlue{\texttt{ML3\_DNN\_suite.ipynb}} visent les savoir-faire :
       \begin{itemize}
       \item charger et pré-traiter les images du MNIST,
       \item construire un réseau de neurones {\bf dense},
-      \item entraîner le réseau reconnaître les images du MNIST,
+      \item entraîner le réseau à reconnaître les images du MNIST,
       \item évaluer et exploiter le réseau entraîné.
       \end{itemize}
       
-    \item Les modules Python utilisés pour créer les réseaux de neurones et les entraîner sont \href{https://www.tensorflow.org/tutorials}{tensorflow}
+    \item Les modules Python utilisés pour créer les réseaux de neurones et les entraîner : \href{https://www.tensorflow.org/tutorials}{tensorflow}
       et \href{https://www.tensorflow.org/versions/r2.4/api_docs/python/tf}{keras}.
-    \item Les scores obtenus avec des réseaux denses peuvent atteindre 98\% de réussite dans les cas les plus favorables.
+    \item Les scores obtenus avec des réseaux denses peuvent atteindre 98\% de réussite.
     \end{itemize}
   \end{tcolorbox}
 
 \end{frame}
 %===============================================================================
 
-\section{Convolutional NN}
-
 %===============================================================================
-\begin{frame}{2 - Réseau de neurones convolutif}
+\begin{frame}{Mise en oeuvre dans l'APP}
 
-  {\small Pour améliorer significativement le score de réussite, il faut passer à des réseaux 
-    spécialisés dans le traitement des images : les \textbf{réseaux de neurones convolutifs} (RNC), ou {\em Convolutional Neural Network (CNN)}.}
+  {\small Améliorer significativement les scores de réussite $\leadsto$ réseau spécialisé dans le traitement des images :
+    \textbf{réseau de neurones convolutifs} {\em Convolutional Neural Network (CNN)}.}
   \smallskip
 
-  \begin{tcolorbox}[title=Mise en oeuvre dans l'APP-ML]
+  \begin{tcolorbox}[title=2 -- Auto-formation / Réseau convolutif]
     \begin{itemize}
-    \item Le {\em notebook} \DarkBlue{\texttt{ML4\_CNN.ipynb}} proposé sur SAVOIR
-      vise les savoir-faire :
+    \item Le {\em notebook} \DarkBlue{\texttt{ML4\_CNN.ipynb}} vise les savoir-faire :
       \begin{itemize}
       \item construire un réseau de neurones {\bf convolutif} inspiré du réseau \textbf{LeNet5} (un des premiers RNC proposé par Yann LeCun {\em et al.} dans les années 90),\\
       \hspace*{-3mm}\includegraphics[width=.7\textwidth]{images/LeNet5-2.png}\\[-2mm]
@@ -494,7 +570,25 @@
 \end{frame}
 %===============================================================================
 
-\section{Vidéographie}
+%===============================================================================
+\begin{frame}{Mise en oeuvre dans l'APP}
+
+  \begin{tcolorbox}[title=3 -- Projet : Entraîner un réseau de neurone avec une banque de données spécifique]
+
+    Pour ce projet d’équipe, les étapes sont :
+
+    \begin{itemize}
+    \item Choix d’une banque de données spécifique à votre projet à trouver sur Internet (images ou autre...).
+    \item Choix du réseau (dense ou convolutif) à entraîner, en utilisant les acquis d’apprentissage de l'auto-formation.
+    \item Entraînement supervisé du réseau de neurones avec la banque de données choisie, évaluation du réseau entraîné.
+    \end{itemize}
+    
+  \end{tcolorbox}
+
+\end{frame}
+%===============================================================================
+
+\section{Links \& bibliography}
 
 %===============================================================================
 \begin{frame}{Vidéographie}
@@ -519,8 +613,6 @@
   
 \end{frame}
 %===============================================================================
-
-\section{Bibliographie}
 
 %===============================================================================
 \begin{frame}{Biliographie}
