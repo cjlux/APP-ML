@@ -15,6 +15,7 @@
 \usepackage{multimedia}
 \usepackage{wasysym}
 \usepackage{animate}
+\usepackage{amssymb}
 
 \usepackage{graphicx}% for including figures
 \usepackage{tikz}
@@ -42,7 +43,7 @@
       \author[{\tiny octobre 2023 -- V3.0}\hspace*{.8\linewidth}]{{\fontsize{8}{8}\selectfont{Jean-Luc.Charles\,@\,ENSAM.EU}}\\[5mm]
         \includegraphics[height=1.4cm]{images/logo-am-couleur-72dpi.jpg}}
 \institute{}
-\date{{\tiny octobre 2023}}
+\date{{\tiny octobre 2022}}
 \titlegraphic{\vspace*{-0.5cm}\includegraphics[height=1.9cm]{images/robot.png}}
 
 \logo{}
@@ -152,15 +153,15 @@
     \begin{itemize}
     \item \textbf{Classification}
       \begin{itemize}
-      \item Classification d'images
-      \item Détection d'objet sdans des images
+      \item Classification d'images, maladies...
+      \item Détection d'objets dans des images
       \item Reconnaissance de la parole...
       \end{itemize}
     \item \textbf{Régression}
       \begin{itemize}
       \item Prédiction d'une valeur (continue)...
       \end{itemize}
-    \item \textbf{Détection d'Anomalies}
+    \item \textbf{Détection d'Anomalie}
       %% anomaliy detection with supervised laerning suppose that there are no "new annomaly" in the
       %% datat set to process, because the anomalies have been learned and the algorithm will not
       % reconize new anomaly that was not learned...
@@ -168,7 +169,6 @@
       \item Détection de Spam
       \item Manufacturing: reconnaissance de défauts (appris)
       \item Prévision du temps
-      \item Classification de maladies...
       \end{itemize}        
     \end{itemize}
   \end{tcolorbox}
@@ -180,7 +180,7 @@
   \begin{tcolorbox}[title={\em Unsupervised learning}\\Apprentissage non-supervisé]
     Ne requiert que des données (non labelisées)...
     \begin{itemize}
-    \item \textbf{Clustering} -- \textbf{Regroupement} de données non labelisées 
+    \item \textbf{Clustering} -- \textbf{Regroupement} de données 
       \begin{itemize}
       \item Data mining, regroupement de données du web, de news...
       \item Regroupement ADN
@@ -205,7 +205,7 @@
 %===============================================================================
 \begin{frame}{Les branches du {\em Machine Learning}}
   \begin{tcolorbox}[title={\em Reinforcement learning}\\Apprentissage par renforcement]
-    Un agent (le réseau de neurones) apprend à piloter un environnement (jeu, système mécatronique...)
+    Un agent (le réseau de neurones) apprend à piloter un environnement (jeu, système mécatronique...) grâce à une récompense (reward)
     \begin{itemize}
     \item \textbf{Contrôle/commande}
       \begin{itemize}
@@ -229,12 +229,12 @@
 
   %% Excellent: https://www.ibm.com/cloud/learn/machine-learning?lnk=fle
   
-  \begin{tcolorbox}[title=Plusieurs approches pour les algorithmes de {\em Machine Learning}]
+  \begin{tcolorbox}[title=Beaucoup d'approches possibles pour les algorithmes de {\em Machine Learning}]
     {\small
       \begin{minipage}[t]{.55\textwidth}
         Supervised learning:
         \begin{itemize}
-        \item Neural Networks
+        \item \Chocolate{Neural Networks}
         \item Bayesian inference
         \item Random forest
         \item Decision Tree
@@ -246,7 +246,7 @@
       \end{minipage}\begin{minipage}[t]{.5\textwidth}
         Unsupervised learning:
         \begin{itemize}
-        \item Neural Networks
+        \item \Chocolate{Neural Networks}
         \item Principal Component Analysis (PCA)
         \item Sungular Value Decomposition (SVD)
         \item K-mean clustering
@@ -316,11 +316,11 @@
 
   \end{tcolorbox}
   
-  \visible<2->{Un \bfdarkchoco{neurone artificiel}:
+  \visible<1->{Un \bfdarkchoco{neurone artificiel}:
     \begin{itemize}
-    \item <2-> reçoit les données d'entrée $(x_{i})_{i=1..n}$ affectées des  \textbf{poids} $(w_i)_{i=1..n}$ ({\em weights}) 
-    \item <3-> calcule la \textbf{somme pondérée} de ses entrées moins le biais $\sum_i{w_{i}\,x_i} - b$
-    \item <4-> produit en sortie une \textbf{activation} $f(\sum_i{w_{i}\,x_i} - b)$, calculée avec une fonction d'activation $f$ (en général non-linéaire).
+    \item <1-> reçoit les données d'entrée $(x_{i})_{i=1..n}$ affectées des  \textbf{poids} $(w_i)_{i=1..n}$ ({\em weights}) 
+    \item <2-> calcule la \textbf{somme pondérée} de ses entrées moins le biais $\sum_i{w_{i}\,x_i} - b$
+    \item <3-> produit en sortie une \textbf{activation} $f(\sum_i{w_{i}\,x_i} - b)$, calculée avec une fonction d'activation $f$ (en général non-linéaire).
     \end{itemize}
   }
 
@@ -365,10 +365,11 @@
   
   Deux architecture sont très souvent utilisées :
   \begin{itemize}
-    \item \textbf{Réseau de Neurones Dense} ({\em Dense Neural Network, RND})\\
+    \item \textbf{Réseau de Neurones Dense} ({\em Dense Neural Network, DNN})\\
       simple, généraliste, peut atteindre des scores de réussite importants.
     \item \textbf{Réseau de Neurones Convolutif} ({\em Convolutional Neural Network, CNN})\\
-      plus complexe, spécialisé dans le traitement des images, peut atteindre des scores supérieurs à 99\% dans la reconnaissance d'images.
+      plus complexe, très utilisé le traitement des images, des séries temporelles...
+      peut atteindre des scores supérieurs à 99\% dans la reconnaissance d'images.
   \end{itemize}
   
 \end{frame}
@@ -383,7 +384,8 @@
     \includegraphics[width=0.6\textwidth]{images/MNIST_digits_sample.png}
   \item Images en ton de gris de 28 $\times$ 28 pixels
   \item Réseau dense $\leadsto$ scores pouvant atteindre 98 \% de succès...
-  \item État de l'art pour la reconnaissance d'image : réseau convolutifs
+  \item État de l'art pour la reconnaissance d'image : réseaux convolutifs\\
+    (pas abordés dans cette APP).
   \end{itemize}       
   
 \end{frame}
@@ -402,8 +404,10 @@
   
   {\footnotesize
   \begin{itemize}
-  \item Couche d'entrée ({\em Input layer}) : fixe la dimension des entrées du réseau, ne comporte aucun neurone.
-  \item Couche "cachée" ({\em Hidden layer}) de 784 neurone (on pourrait essayer plus, ou moins...) : reçoit les données d'entrées.
+  \item Couche d'entrée ({\em Input layer}) : fixe la dimension des entrées du réseau\\
+    {\bf ne comporte aucun neurone !}
+  \item Couche "cachée" ({\em Hidden layer}) de 784 neurone (on pourrait essayer plus, ou moins...) :
+    reçoit les données de la couche d'entrée.
   \item Couche de sortie ({\em Output layer}) : 10 neurones, un pour chaque chiffre à reconnaître.
   \end{itemize}
   }
@@ -439,7 +443,7 @@
         \begin{itemize}
         \item L'activation du neurone $k$ est $Y_k = e^{y_k}/\sum_i{e^{y_i}}$ 
           avec $y_k = \sum_i \omega_i x_i - b$ calculé par le neurone $k$.
-        \item Les sorties des neurones s'interprêtent comme des probabilités dans l'intervalle [0,1].
+        \item Les sorties des neurones s'interprètent comme des probabilités dans l'intervalle [0,1].
         \end{itemize}
       }
     \end{minipage}
@@ -458,15 +462,15 @@
 
   \begin{tcolorbox}[title=Codage {\em One-hot} des labels]  
 
-    But : mettre les label des images au format de la sortie du réseau
+    Mettre les labels des images au format de la sortie du réseau :
 
     {\small
         \begin{itemize}
         \item Labels des images  : \textbf{nombres entiers} de 0 à 9.
         \item Sortie du réseau : \textbf{vecteur de 10 \texttt{float}} dans l'intervalle [0,1] calculés par les fonctions {\em softmax} des 10 neurones de sortie.
-        \item Codage {\em one-hot} d'un ensemble ordonné de $N$ labels : \\[1mm]
+        \item Codage {\em one-hot} d'un ensemble ordonné $\mathfrak{L}$ de $N$ labels : \\[1mm]
           - chaque label est représenté par un vecteur à $N$ composantes toutes nulles sauf une égale à $1$,\\
-          - le rang du $1$ dans le vecteur associé à un label est le rang du label.
+          - le rang du $1$ du vecteur associé à un label est le rang du label dans $\mathfrak{L}$.
         \end{itemize}
       }
   \end{tcolorbox}  
@@ -550,10 +554,9 @@
 \begin{frame}{}
   \includegraphics[width=1.2\textwidth]{./images/NetworkTraining.png}
   \begin{itemize}
-  \item Le jeu de données est découpé en (mini) {\bf batches} de taille \code{batch\_size}
-    \visible<2->{%
-    \item Après chaque {\em feed forward} l'algorithme de {\em Back Propagation} modifie les poids
-      du réseau de neurone pour minimiser l'erreur $e$.}
+  \item <2-> Le jeu de données est découpé en (mini) {\bf batches} de taille \code{batch\_size}
+  \item <3-> Après chaque {\em feed forward} l'algorithme de {\em Back Propagation} modifie les poids
+    du réseau de neurones pour minimiser l'erreur $e$.
   \end{itemize}
 \end{frame}
 %===============================================================================
@@ -563,10 +566,9 @@
 %===============================================================================
 \begin{frame}{}
   
-  \begin{itemize}
-  \item L'entraînement avec le jeu de données complet est répété \code{n\_epoch} fois...
-  \end{itemize}
-  \includegraphics[width=\textwidth]{./images/NetworkTraining_2.png}
+L'entraînement avec le jeu de données complet est répété \code{n\_epoch} fois...
+
+\includegraphics[width=\textwidth]{./images/NetworkTraining_2.png}
   
 \end{frame}
 %===============================================================================
@@ -576,7 +578,7 @@
 %===============================================================================
 \begin{frame}{Mise en oeuvre dans l'APP}
 
-  \begin{tcolorbox}[title=1 -- Auto-formation / Réseau dense]
+  \begin{tcolorbox}[title=Étape 1 -- Auto-formation / Réseau dense]
     \begin{itemize}
     \item Les trois {\em notebooks} \DarkBlue{\texttt{ML1\_MNIST.ipynb}}, \DarkBlue{\texttt{ML2\_DNN.ipynb}} et \DarkBlue{\texttt{ML3\_DNN\_suite.ipynb}} visent les savoir-faire :
       \begin{itemize}
@@ -598,14 +600,14 @@
 %===============================================================================
 \begin{frame}{Mise en oeuvre dans l'APP}
 
-  \begin{tcolorbox}[title=2 -- Résolution d'un problème de classification]
+  \begin{tcolorbox}[title=Étape 2 -- Résolution d'un problème de classification]
     \begin{itemize}
-    \item On dispose de données acquises sur un banc de perçage instrumenté.
-    \item Une première étape de pré-traitement permet de calculer une quinzaine de
-      méta-données ({\em features}) à partir des données brutes acquises avec les capteurs du banc.
-    \item L'étude des pré-traitements sera abordée lors de séances de {\em traitement du signal} dédiées.
+    \item On dispose de données labellisées acquises sur un banc de perçage instrumenté.
+    \item Une première étape de pré-traitement permet de calculer des méta-données
+      ({\em features}) à partir des données acquises sur le banc.
+    \item \Chocolate{L'étude des pré-traitements sera abordée lors de séances de {\em traitement du signal} dédiées.}
     \item Le \textbf{problème} proposé : entraîner un réseau de neurones dense à reconnaître le matériau percé
-      à partir des méta-données extraites du banc de perçage.
+      à partir des méta-données labellisées extraites du banc de perçage.
     \end{itemize}
       
   \end{tcolorbox}
