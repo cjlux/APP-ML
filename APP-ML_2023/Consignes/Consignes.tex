@@ -68,7 +68,7 @@
 
 \lhead{\footnotesize APP -- {\em Machine Learning}}
 \chead{\footnotesize }
-\rhead{\footnotesize Version 3.0 -- 10 octobre 2022}
+\rhead{\footnotesize Version 3.1 -- 6 novembre 2022}
 \lfoot{\fontsize{9}{9}\selectfont\textbf{Arts \& Métiers ParisTech}~-~\textit{Bordeaux}}
 \cfoot{\fontsize{9}{9}\selectfont\thepage~/~\pageref{LastPage}}
 \rfoot{\fontsize{9}{9}\selectfont{UEI 2A -- Réaliser Système}}
@@ -148,13 +148,13 @@
 
 \section*{Acquis d'apprentissage visés}
 
-À la fin de cet apprentissage par problème de 3 séances de 3 heures, chaque étudiant saura :
+À la fin de cet apprentissage par problème de 3 $\times$ 3h, chaque étudiant saura :
 \begin{itemize}
 \item[$\rhd$] Programmer en langage Python un {\em Réseau de Neurones Dense} (RND) dédié à la classification de données
   en utilisant les modules \boldtt{tensorflow2} et \boldtt{keras}.
-\item[$\rhd$] Expliquer la construction des données labellisées utilisées pour l'entraînement du RND.
-\item[$\rhd$] Conduire l'entraînement supervisé du RND en utilisant les méta-données labellisées issues du banc de perçage.
-\item[$\rhd$] Évaluer les performances du réseau entraîné en utilisant des données de test.
+\item[$\rhd$] Expliquer la structure des données labellisées construites avec les données temporelles brutes issues du banc de perçage.
+\item[$\rhd$] Conduire l'entraînement supervisé du RND en utilisant les données labellisées disponibles dans un fichier CSV.
+\item[$\rhd$] Évaluer les performances du réseau entraîné en utilisant des données de test, en particulier afficher la matrice de confusion.
 \end{itemize}
 
 %%%%%%%%%%%%%%%%%%%% diapo 2 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -163,15 +163,16 @@
 \section*{\Large\ding{220} Planification suggérée des 3 séances d'APP}
 
 Au cours des 3 séances, les étudiants travaillent en autonomie par équipe de 3 ou 4
-avec leurs ordinateurs portables, dans un \textbf{Environnement Virtuel Python}
-(EVP) \DarkRed{\boldtt{minfo\_ml}} spécialement créé pour cet APP.
+en utilisant l'\textbf{Environnement Virtuel Python} (EVP) \DarkRed{\boldtt{minfo\_ml}}
+spécialement créé pour cet APP sur leurs ordinateurs portables. 
 
 \begin {bclogo}[noborder=true, couleur=green!10, couleurBarre=DarkGreen, logo=\large\ding{220}]{}
   \vspace*{-4mm}\boldtt{\Large Travail préliminaire} : à faire avant les 3 séances, avec un accès Internet haut-débit\\[-5mm]
   \begin{itemize}
   \setlength{\parsep}{-0.2mm}\setlength{\itemsep}{-0.4mm}    
     \item Télécharger les documents de travail depuis l'ENT SAVOIR.
-    \item Créer l'EVP \DarkRed{\boldtt{minfo\_ml}} puis installer les modules Python nécessaires au {\em Machine Learning} ({\em cf} détails page suivante).
+    \item Créer l'EVP \DarkRed{\boldtt{minfo\_ml}} et installer les modules Python nécessaires au travail de {\em Machine Learning},\\
+      en suivant la procédure donnée sur page suivante.
   \end{itemize} 
 \end{bclogo}  
 %
@@ -181,17 +182,17 @@ avec leurs ordinateurs portables, dans un \textbf{Environnement Virtuel Python}
   \begin{itemize}
   \item travail personnel avec les trois {\em notebooks} \file{ML1\_MNIST.ipynb}, \file{ML2\_DNN.ipynb}, et \file{ML3\_DNN\_suite.ipynb}
     pour apprendre à charger les images MNIST, construire un réseau de neurones dense et l'entraîner à reconnaître les images du MNIST.
-  \item \textbf{Prise en main du problème} : entraînement supervisé d'un RND pour classifier les données labéllisées obtenues par traitement des données brutes
-    acquises sur un banc de perçage. Exploitation du RND entraîné, avec différents objectifs. 
+  \item \textbf{Prise en main du problème de l'APP} : entraînement supervisé d'un RND pour classifier les données labellisées obtenues
+    par traitement des données brutes d'un banc de perçage instrumenté. Exploitation du RND entraîné, avec différents objectifs. 
   \end{itemize}
 \end{bclogo}  
 %
 \vspace*{-3mm}
 \begin {bclogo}[noborder=true, couleurBarre=Chocolate, logo=\large\ding{220}]{}
-  \vspace*{-4mm}\boldtt{\Large Séance 3 : fin du projet}\\[-5mm]
+  \vspace*{-4mm}\boldtt{\Large Séance 3 : fin du projet + rendu}\\[-5mm]
   \begin{itemize}
-    \item Première heure et demie $\leadsto$ Préparation du rendu ;
-    \item Dernière heure et demie $\leadsto$ Évaluation : présentation à l'enseignant du rendu du projet.
+    \item Première heure et demie $\leadsto$ Fin du projet, finalisation du rendu ;
+    \item Dernière heure et demie $\leadsto$ Évaluation : présentation interactive du rendu à l'enseignant.
   \end{itemize}
 \end{bclogo}  
 
@@ -200,17 +201,18 @@ avec leurs ordinateurs portables, dans un \textbf{Environnement Virtuel Python}
 \vspace*{-16mm}
 \section*{\ding{220} Péliminaire -- Configurer l'EVP \DarkRed{\boldtt{minfo\_ml}}, auto-formation au {\em Machine Learning}}
 
-\vspace*{-1mm}Télécharge depuis SAVOIR l'archive \file{APP-ML$\cdots$.zip} et \Chocolate{\textbf{extrais}} le dossier \file{APP-ML} sur ton ordinateur portable.
+\vspace*{-2mm}Télécharger depuis SAVOIR l'archive \file{APP-ML$\cdots$.zip} et \Chocolate{\textbf{extraire}} le dossier \file{APP-ML} sur ton ordinateur portable.
 Une fois extrait, le contenu du dossier \file{APP-ML} est le suivant :
 \vspace*{-3mm}
 \begin {bclogo}[noborder=true, couleurBarre=Chocolate, logo=\bcinfo]{}
   \vspace*{-5mm}%
   \begin{description}
- \setlength{\parsep}{-0.2mm}\setlength{\itemsep}{-0.2mm}    
+ \setlength{\parsep}{-0.2mm}\setlength{\itemsep}{-0.2mm}
  \item[Dossier \file{Cours}] : contient le fichier PDF de l'amphi "Comprendre et utiliser le {\em Machine Learning}".
  \item[Dossier \file{Notebook}] : contient les {\em notebooks} d'auto-formation \file{ML$\cdots$.ipynb}.
+ \item[Dossier \file{Drilling-Problem}] : contient les fichiers pour traiter lea partie "problème" de l'APP.
  \item[Fichier \file{Consignes.pdf}] : le présent document.
- \item[Fichier \file{requirements.txt}] : liste lds modules Python nécessaires au travail de l'APP.
+ \item[Fichier \file{requirements.txt}] : contient la liste les modules Python nécessaires au travail de l'APP.
 \end{description}
 \end{bclogo}  
 %
@@ -244,20 +246,22 @@ Les modules nécessaires à l'APP sont ensuite installés en utilisant le fichie
 \begin {bclogo}[noborder=true, couleurBarre=Chocolate, logo=\bctrombone]{}
   \vspace*{-4mm}\textbf{Auto-formation: travail personnel avec les {\em notebooks} de l'APP}\\[-2mm]
 
-  Les {\em notebooks} de l'APP permettent d'acquérir les savoir-faire nécessaires pour construire un réseau de neurones dense
-  et l'entraîner à reconnaître les images de la banque MNIST.
+  Les trois {\em notebooks} de l'APP permettent d'acquérir les savoir-faire nécessaires pour construire un réseau de neurones dense
+  et apprendre à l'entraîner avec des données labellisées.
 
-Chaque étudiant doit s'auto-former en travaillant les {\em notebooks} avec un processus {\em jupyter notebook} lancé dans l'EVP \DarkRed{\boldtt{minfo\_ml}}.
+Chaque étudiant doit s'auto-former en travaillant les {\em notebooks} chargés dans un processus {\em jupyter notebook} lancé dans l'EVP \DarkRed{\boldtt{minfo\_ml}}.
 \end{bclogo}  
 
 \begin {bclogo}[noborder=true, couleurBarre=Chocolate, logo=\bctrombone]{}
-  \vspace*{-4mm}\textbf{Problème à traiter en équipe : entraîner un RND à classifier des données labellisées issues d'un banc de perçage}\\[-2mm]
-
+  \vspace*{-4mm}\textbf{Problème à traiter en équipe : entraîner un RND à classifier des données labellisées issues d'un banc de perçage}
+  
+Le travail se fait avec le notebook \file{ML-drilling.ipynb} du dossier \file{Drilling-Problem}. Le plan de trvail poposé est :
 \begin{enumerate}
 \item Comprendre comment est constitué le jeu de données labellisées qui va servir à entraîner le réseau de neurones.
-\item Construire le RND à entraîner, en utilisant les acquis d'apprentissage de l'auto-formation.
-\item Entraînement supervisé du RND avec le jeu de données labellisées.
-\item Évaluation du RND entraîné, en utilisant des données de test.
+\item Construire le RND en utilisant les acquis d'apprentissage de l'auto-formation.
+\item Conduire l'entraînement supervisé du RND avec le jeu des données labellisées.
+\item Évaluer les performances du RND entraîné en utilisant les données de test.
+\item Rechercher parmi les données d'entraînement celles qui sont le plus pertinentes en considérant plus critères de pertinence.
 \end{enumerate}
 
 Le projet est conduit par l'équipe qui doit répartir entre ses membres les tâches à réaliser pour le projet.
@@ -271,25 +275,15 @@ Le projet est conduit par l'équipe qui doit répartir entre ses membres les tâ
 \begin {bclogo}[noborder=true, couleurBarre=Chocolate, logo=\bctrombone]{}
   \vspace*{-4mm}\textbf{Préparation du notebook de rendu du projet}
 
-L'équipe prépare un rendu sous la forme d'un {\em notebook} qui pourra être initialisé par "copié/collé/modifié" de cellules des {\em notebooks} d'auto-formation.
-Le cahier \file{template.ipynb} donne aussi des exemples de mise en forme en utilisant des cellules {\em Markdown}.
+Le rendu de l'équipe est le {\em notebook} \file{ML-drilling.ipynb} complété et annoté par les membres de l'équipe.
 
-Le {\em notebook} rendu devra à minima présenter les points suivants :
-\begin{itemize}
-\item Structure et contenu du jeu de données utilisé.
-\item Construction et entraînement du RND choisi : stratégie d'entraînement et d'évaluation, résultats (courbes de performance...).
-\item Performance du RND pour classifier de nouvelles données, si disponibles pour la séance pédagogique.
-\item Critique des choix faits, des résultats obtenus...
-\end{itemize}
-\end{bclogo}  
-%
 \vspace*{-2mm}
 \bigskip
 Critères d'évaluation du rendu: \\
 - aptitude à mettre en oeuvre les acquis d'apprentissage visés;\\
-- aptitude à présenter le contenu du projet en utilisant les possibilités d'un {\em notebook} Python;\\
+- aptitude à présenter les différentes étapes de la résolution du problème projet en utilisant les possibilités d'un {\em notebook} Python;\\
 - aptitude à présenter et critiquer les résultats obtenus.\\
-- aptitude individuelle à répondre aux questions.\\
-
+- aptitudes individuelles à répondre aux questions.\\
+\end{bclogo}  
 
 \end{document}

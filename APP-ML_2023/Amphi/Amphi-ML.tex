@@ -40,7 +40,7 @@
 
 \title[\hspace*{.8\linewidth}\insertframenumber/\inserttotalframenumber]
       {\fontsize{18}{18}\selectfont{Apprentissage Par Problème [APP]\\[3mm]Comprendre et utiliser le\\ \em{Machine learning}}}
-      \author[{\tiny octobre 2023 -- V3.0}\hspace*{.8\linewidth}]{{\fontsize{8}{8}\selectfont{Jean-Luc.Charles\,@\,ENSAM.EU}}\\[5mm]
+      \author[{\tiny 7 novembre 2022 -- V3.1}\hspace*{.8\linewidth}]{{\fontsize{8}{8}\selectfont{Jean-Luc.Charles\,@\,ENSAM.EU}}\\[5mm]
         \includegraphics[height=1.4cm]{images/logo-am-couleur-72dpi.jpg}}
 \institute{}
 \date{{\tiny octobre 2022}}
@@ -149,7 +149,7 @@
 \begin{frame}{Les branches du {\em Machine Learning}}
 
   \begin{tcolorbox}[title={\em Supervised learning}\\Apprentissage supervisé]
-  Requiert des {\bf données labelisées}...
+  Requiert des {\bf données labellisées}...
     \begin{itemize}
     \item \textbf{Classification}
       \begin{itemize}
@@ -178,7 +178,7 @@
 %===============================================================================
 \begin{frame}{Les branches du {\em Machine Learning}}
   \begin{tcolorbox}[title={\em Unsupervised learning}\\Apprentissage non-supervisé]
-    Ne requiert que des données (non labelisées)...
+    Ne requiert que des données (non labellisées)...
     \begin{itemize}
     \item \textbf{Clustering} -- \textbf{Regroupement} de données 
       \begin{itemize}
@@ -240,16 +240,18 @@
         \item Decision Tree
         \item Support Vector Machine (SVM)
         \item K-Nearest Neighbor (KNN)
-        \item Linear egression
-        \item Logistic regression...
+        \item Linear regression
+        \item Logistic regression
+        \item ...
         \end{itemize}
       \end{minipage}\begin{minipage}[t]{.5\textwidth}
         Unsupervised learning:
         \begin{itemize}
         \item \Chocolate{Neural Networks}
         \item Principal Component Analysis (PCA)
-        \item Sungular Value Decomposition (SVD)
+        \item Singular Value Decomposition (SVD)
         \item K-mean clustering
+        \item ...
         \end{itemize}
       \end{minipage}
     }
@@ -469,7 +471,7 @@
         \item Labels des images  : \textbf{nombres entiers} de 0 à 9.
         \item Sortie du réseau : \textbf{vecteur de 10 \texttt{float}} dans l'intervalle [0,1] calculés par les fonctions {\em softmax} des 10 neurones de sortie.
         \item Codage {\em one-hot} d'un ensemble ordonné $\mathfrak{L}$ de $N$ labels : \\[1mm]
-          - chaque label est représenté par un vecteur à $N$ composantes toutes nulles sauf une égale à $1$,\\
+          - chaque label est représenté par un vecteur à $N$ composantes toutes nulles, sauf une (égale à $1$),\\
           - le rang du $1$ du vecteur associé à un label est le rang du label dans $\mathfrak{L}$.
         \end{itemize}
       }
@@ -493,8 +495,8 @@
   \begin{tcolorbox}[title=Fonction d'erreur : {\em Cross entropy error}]  
 
     \begin{itemize}
-    \item Une image traitée par le réseau $\leadsto$ vecteur $\hat{Y}$ de 10 \texttt{float} à comparer au codage {\em hot-one} $Y$ du label de l'image.
-    \item On utilise la fonction d'erreur (ou de perte) {\em cross entropy} adaptée au codage {\em one-hot} : $e(Y,\hat{Y})=-\sum_i Y_i\ log(\hat{Y}_i)$\\
+    \item L'image traitée par le réseau $\leadsto$ vecteur $\hat{Y}$ de 10 \texttt{float} à comparer au vecteur $Y$ du codage {\em hot-one} du label de l'image.
+    \item La fonction d'erreur (de perte) {\em cross entropy} est adaptée au codage {\em one-hot} : $e(Y,\hat{Y})=-\sum_i Y_i\ log(\hat{Y}_i)$\\
       \includegraphics[width=.9\textwidth]{images/CrossEntropyError.png}
     \end{itemize}
 
@@ -556,7 +558,7 @@
   \begin{itemize}
   \item <2-> Le jeu de données est découpé en (mini) {\bf batches} de taille \code{batch\_size}
   \item <3-> Après chaque {\em feed forward} l'algorithme de {\em Back Propagation} modifie les poids
-    du réseau de neurones pour minimiser l'erreur $e$.
+    des neurones pour minimiser l'erreur $e$.
   \end{itemize}
 \end{frame}
 %===============================================================================
@@ -600,14 +602,16 @@ L'entraînement avec le jeu de données complet est répété \code{n\_epoch} fo
 %===============================================================================
 \begin{frame}{Mise en oeuvre dans l'APP}
 
-  \begin{tcolorbox}[title=Étape 2 -- Résolution d'un problème de classification]
+  \begin{tcolorbox}[title=Étape 2 -- Problème : classification des données \\
+      \hspace*{20mm}d'un banc de perçage]
     \begin{itemize}
     \item On dispose de données labellisées acquises sur un banc de perçage instrumenté.
-    \item Une première étape de pré-traitement permet de calculer des méta-données
-      ({\em features}) à partir des données acquises sur le banc.
+      \item Le label considéré ici est le matériau percé.
+    \item Une première étape de pré-traitement permet de calculer des indicateurs caractéristiques 
+      ({\em features}) à partir des données temporelles brutes acquises sur le banc.
     \item \Chocolate{L'étude des pré-traitements sera abordée lors de séances de {\em traitement du signal} dédiées.}
     \item Le \textbf{problème} proposé : entraîner un réseau de neurones dense à reconnaître le matériau percé
-      à partir des méta-données labellisées extraites du banc de perçage.
+      à partir des indicateurs labellisés extraits du banc de perçage.
     \end{itemize}
       
   \end{tcolorbox}
