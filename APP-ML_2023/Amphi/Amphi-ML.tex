@@ -40,10 +40,10 @@
 
 \title[\hspace*{.8\linewidth}\insertframenumber/\inserttotalframenumber]
       {\fontsize{18}{18}\selectfont{Apprentissage Par Problème [APP]\\[3mm]Comprendre et utiliser le\\ \em{Machine learning}}}
-      \author[{\tiny 7 novembre 2022 -- V3.1}\hspace*{.8\linewidth}]{{\fontsize{8}{8}\selectfont{Jean-Luc.Charles\,@\,ENSAM.EU}}\\[5mm]
+      \author[{\tiny 15 novembre 2022 -- V3.2}\hspace*{.8\linewidth}]{{\fontsize{8}{8}\selectfont{Jean-Luc.Charles\,@\,ENSAM.EU}}\\[5mm]
         \includegraphics[height=1.4cm]{images/logo-am-couleur-72dpi.jpg}}
 \institute{}
-\date{{\tiny octobre 2022}}
+\date{{\tiny Novembre 2022}}
 \titlegraphic{\vspace*{-0.5cm}\includegraphics[height=1.9cm]{images/robot.png}}
 
 \logo{}
@@ -555,9 +555,9 @@
 %===============================================================================
 \begin{frame}{}
   \includegraphics[width=1.2\textwidth]{./images/NetworkTraining.png}
-  \begin{itemize}
-  \item <2-> Le jeu de données est découpé en (mini) {\bf batches} de taille \code{batch\_size}
-  \item <3-> Après chaque {\em feed forward} l'algorithme de {\em Back Propagation} modifie les poids
+  \vspace*{-3mm}\begin{itemize}
+  \item Le jeu de données est découpé en (mini) {\bf batches} de taille \code{batch\_size}
+  \item Après chaque {\em feed forward} l'algorithme de {\em Back Propagation} modifie les poids
     des neurones pour minimiser l'erreur $e$.
   \end{itemize}
 \end{frame}
@@ -567,10 +567,11 @@
 
 %===============================================================================
 \begin{frame}{}
-  
-L'entraînement avec le jeu de données complet est répété \code{n\_epoch} fois...
-
-\includegraphics[width=\textwidth]{./images/NetworkTraining_2.png}
+  \includegraphics[width=\textwidth]{./images/NetworkTraining_2.png}
+  \vspace*{-3mm}\begin{itemize}
+  \item L'entraînement avec le jeu de données est répété \code{n\_epoch} fois,
+  \item L'état du réseau à la fin de l'époque \code{n} sert d'état initial pour l'époque \code{n+1}.
+  \end{itemize}
   
 \end{frame}
 %===============================================================================
@@ -578,7 +579,7 @@ L'entraînement avec le jeu de données complet est répété \code{n\_epoch} fo
 \section{APP}
 
 %===============================================================================
-\begin{frame}{Mise en oeuvre dans l'APP}
+\begin{frame}{Mise en {\oe}uvre dans l'APP}
 
   \begin{tcolorbox}[title=Étape 1 -- Auto-formation / Réseau dense]
     \begin{itemize}
@@ -586,7 +587,7 @@ L'entraînement avec le jeu de données complet est répété \code{n\_epoch} fo
       \begin{itemize}
       \item charger et pré-traiter les images du MNIST,
       \item construire un réseau de neurones {\bf dense},
-      \item entraîner le réseau reconnaître les images du MNIST,
+      \item entraîner le réseau à reconnaître les images du MNIST,
       \item évaluer et exploiter le réseau entraîné.
       \end{itemize}
       
@@ -600,15 +601,15 @@ L'entraînement avec le jeu de données complet est répété \code{n\_epoch} fo
 %===============================================================================
 
 %===============================================================================
-\begin{frame}{Mise en oeuvre dans l'APP}
+\begin{frame}{Mise en {\oe}uvre dans l'APP}
 
   \begin{tcolorbox}[title=Étape 2 -- Problème : classification des données \\
       \hspace*{20mm}d'un banc de perçage]
     \begin{itemize}
     \item On dispose de données labellisées acquises sur un banc de perçage instrumenté.
       \item Le label considéré ici est le matériau percé.
-    \item Une première étape de pré-traitement permet de calculer des indicateurs caractéristiques 
-      ({\em features}) à partir des données temporelles brutes acquises sur le banc.
+    \item Une première étape de pré-traitement permet de calculer des {\bf indicateurs caractéristiques} 
+      ({\em features}) à partir des données temporelles acquises sur le banc.
     \item \Chocolate{L'étude des pré-traitements sera abordée lors de séances de {\em traitement du signal} dédiées.}
     \item Le \textbf{problème} proposé : entraîner un réseau de neurones dense à reconnaître le matériau percé
       à partir des indicateurs labellisés extraits du banc de perçage.
